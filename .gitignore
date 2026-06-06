@@ -10,5 +10,3 @@ venv
 updater.build
 updater.dist
 updater.onefile-build
-
-version.json
