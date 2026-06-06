@@ -93,9 +93,10 @@ jobs:
             --assume-yes-for-downloads \
             main.py
 
-      - name: Zip Linux Build
+      - name: Zip Linux Build (FLATTENED)
         run: |
-          zip -r ubuntu-x64.zip dist/linux-x64
+          cd dist/linux-x64
+          zip -r ../../ubuntu-x64.zip .
 
       - name: Upload Linux Build
         uses: actions/upload-artifact@v4
@@ -139,9 +140,10 @@ jobs:
             --assume-yes-for-downloads \
             main.py
 
-      - name: Zip macOS Build
+      - name: Zip macOS Build (FLATTENED)
         run: |
-          zip -r macos-x64.zip dist/macos-x64
+          cd dist/macos-x64
+          zip -r ../../macos-x64.zip .
 
       - name: Upload macOS Build
         uses: actions/upload-artifact@v4
@@ -185,9 +187,10 @@ jobs:
             --assume-yes-for-downloads \
             main.py
 
-      - name: Zip macOS ARM64 Build
+      - name: Zip macOS ARM64 Build (FLATTENED)
         run: |
-          zip -r macos-arm64.zip dist/macos-arm64
+          cd dist/macos-arm64
+          zip -r ../../macos-arm64.zip .
 
       - name: Upload macOS ARM64 Build
         uses: actions/upload-artifact@v4
@@ -195,17 +198,20 @@ jobs:
           name: macos-arm64-build
           path: macos-arm64.zip
 
+
   create-release:
     needs:
       - build-windows-x64
       - build-ubuntu-x64
       - build-macos-x64
       - build-macos-arm64
+
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
+
     steps:
-      # 1. Explicitly download each artifact by name into a 'binaries' folder
       - name: Download Windows Build
         uses: actions/download-artifact@v4
         with:
@@ -230,12 +236,11 @@ jobs:
           name: macos-arm64-build
           path: binaries
 
-      # 2. Create the Release and attach the binaries
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
-          fail_on_unmatched_files: true # <--- CRITICAL: Forces a hard failure if any file is missing
+          fail_on_unmatched_files: true
           files: |
             binaries/windows-x64.zip
             binaries/ubuntu-x64.zip

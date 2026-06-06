@@ -6,3 +6,9 @@ main.build/
 main.dist/
 __pycache__/
 venv
+
+updater.build
+updater.dist
+updater.onefile-build
+
+version.json

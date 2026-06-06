@@ -11,16 +11,26 @@ from PySide6.QtGui import QFont, QIcon
 # System imports
 import sys
 from typing import NoReturn
+import subprocess
+import os
 
 # Local imports
 import functions
 import plugin_loader
 from logger import logger
+from update_checker import UpdateChecker
 
 ### Main Window Class ###
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.update_checker = UpdateChecker()
+        update_check = self.update_checker.check_for_updates()
+        if update_check is True:
+            app_dir = os.path.dirname(sys.executable)
+            subprocess.Popen(["updater.exe", app_dir])
+            sys.exit(0)
+
         self.init_ui()
 
     def init_ui(self):
