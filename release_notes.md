@@ -1,20 +1,16 @@
-# CapyUtilities v0.1
-## Released on 5-24-2026
+# CapyUtilities v0.2.1
+## Released on 6-7-2026
 
 ### New Features
-- Added plugin system for custom widgets
-- Widgets can now be dynamically loaded using plugin metadata
-- Initial set of built-in utilities added:
-  - Capitalization Widget
-  - Base64 Encode/Decode Widget
-  - Word Count Widget
+- Auto-Updating System: An auto updating system which is still in beta. 
+- Auto compilation GitHub Action Workflow results in folder structure windows-x64.zip/ instead of windows-x64.zip/main.dist/
 
 ### Bug Fixes
-- Fixed issue where some widgets failed to load on startup
+- No bugs found in the last update
 
 ### Coming Soon
 - More text and file utilities
-- Improved plugin system stability
+- CapyConvert, a full suite of image conversion utilities.
 - UI improvements for faster navigation
 - Search bar shows suggestions
 
@@ -24,6 +20,9 @@
 - CapitalizationWidget
 - Base64Widget
 - WordCountWidget
+- QRCodeWidget
+- MarkdownFormatterWidget
+- ColorPickerWidget
 
 **Beta**
-- MarkdownFormatterWidget
+- CapyConvert
